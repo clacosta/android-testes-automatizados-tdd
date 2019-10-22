@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 public class LeilaoTest {
 
+    public static final double DELTA = 0.0001;
     private final Leilao CONSOLE = new Leilao("Console");
     private final Usuario ALEX = new Usuario("Alex");
 
@@ -23,7 +24,7 @@ public class LeilaoTest {
     public void deve_DevolveMaiorLance_QuandoRecebeApenasUmLance() {
         CONSOLE.propoe(new Lance(ALEX, 200.0));
         double maiorLance = CONSOLE.getMaiorLance();
-        assertEquals(200.0, maiorLance, 0.0001);
+        assertEquals(200.0, maiorLance, DELTA);
     }
 
     @Test
@@ -31,7 +32,7 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(ALEX, 100.0));
         CONSOLE.propoe(new Lance(new Usuario("Fran"), 200.0));
         double maiorLance = CONSOLE.getMaiorLance();
-        assertEquals(200.0, maiorLance, 0.0001);
+        assertEquals(200.0, maiorLance, DELTA);
     }
 
     @Test
@@ -39,14 +40,14 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(ALEX, 10000.00));
         CONSOLE.propoe(new Lance(new Usuario("Fran"), 9000.00));
         double maiorLance = CONSOLE.getMaiorLance();
-        assertEquals(10000.00, maiorLance, 0.0001);
+        assertEquals(10000.00, maiorLance, DELTA);
     }
 
     @Test
     public void deve_DevolveMenorLance_QuandoRecebeApenasUmLance() {
         CONSOLE.propoe(new Lance(ALEX, 200.0));
         double menorLance = CONSOLE.getMenorLance();
-        assertEquals(200.0, menorLance, 0.0001);
+        assertEquals(200.0, menorLance, DELTA);
     }
 
     @Test
@@ -54,7 +55,7 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(ALEX, 100.0));
         CONSOLE.propoe(new Lance(new Usuario("Fran"), 200.0));
         double menorLance = CONSOLE.getMenorLance();
-        assertEquals(100.0, menorLance, 0.0001);
+        assertEquals(100.0, menorLance, DELTA);
     }
 
     @Test
@@ -62,7 +63,7 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(ALEX, 10000.0));
         CONSOLE.propoe(new Lance(new Usuario("Fran"), 9000.0));
         double menorLance = CONSOLE.getMenorLance();
-        assertEquals(9000.0, menorLance, 0.0001);
+        assertEquals(9000.0, menorLance, DELTA);
     }
 
     @Test
@@ -72,6 +73,8 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(ALEX, 400.0));
         List<Lance> tresMaioredsLances = CONSOLE.tresMaioresLances();
         assertEquals(3, tresMaioredsLances.size());
-        
+        assertEquals(400.0, tresMaioredsLances.get(0).getValor(), DELTA);
+        assertEquals(300.0, tresMaioredsLances.get(1).getValor(), DELTA);
+        assertEquals(200.0, tresMaioredsLances.get(2).getValor(), DELTA);
     }
 }
