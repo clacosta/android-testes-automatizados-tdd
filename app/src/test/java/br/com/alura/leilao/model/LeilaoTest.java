@@ -67,7 +67,7 @@ public class LeilaoTest {
     }
 
     @Test
-    public void deve_DevolvorTresMaioresLances_QundoRecebeExatosTresLances() {
+    public void deve_DevolverTresMaioresLances_QuandoRecebeExatosTresLances() {
         CONSOLE.propoe(new Lance(ALEX, 200.0));
         CONSOLE.propoe(new Lance(new Usuario("Fran"), 300.0));
         CONSOLE.propoe(new Lance(ALEX, 400.0));
@@ -77,4 +77,29 @@ public class LeilaoTest {
         assertEquals(300.0, tresMaioredsLances.get(1).getValor(), DELTA);
         assertEquals(200.0, tresMaioredsLances.get(2).getValor(), DELTA);
     }
+
+    @Test
+    public void deve_DevolverTresMaioresLances_QuandoNaoRecebeLances() {
+        List<Lance> tresMaioredsLances = CONSOLE.tresMaioresLances();
+        assertEquals(0, tresMaioredsLances.size());
+    }
+
+    @Test
+    public void deve_DevolverTresMaioresLances_QuandoRecebeApenasUmLance() {
+        CONSOLE.propoe(new Lance(ALEX, 200.0));
+        List<Lance> tresMaioredsLances = CONSOLE.tresMaioresLances();
+        assertEquals(1, tresMaioredsLances.size());
+        assertEquals(200.0, tresMaioredsLances.get(0).getValor(), DELTA);
+    }
+
+    @Test
+    public void deve_DevolverTresMaioresLances_QuandoRecebeApenasDoisLance() {
+        CONSOLE.propoe(new Lance(ALEX, 300.0));
+        CONSOLE.propoe(new Lance(ALEX, 400.0));
+        List<Lance> tresMaioredsLances = CONSOLE.tresMaioresLances();
+        assertEquals(2, tresMaioredsLances.size());
+        assertEquals(400.0, tresMaioredsLances.get(0).getValor(), DELTA);
+        assertEquals(300.0, tresMaioredsLances.get(1).getValor(), DELTA);
+    }
+
 }
