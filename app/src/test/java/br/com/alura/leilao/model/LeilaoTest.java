@@ -102,4 +102,23 @@ public class LeilaoTest {
         assertEquals(300.0, tresMaioredsLances.get(1).getValor(), DELTA);
     }
 
+    @Test
+    public void deve_DevolverTresMaioresLances_QuandoRecebeMaisDeTresLances() {
+        CONSOLE.propoe(new Lance(ALEX, 300.0));
+        CONSOLE.propoe(new Lance(ALEX, 400.0));
+        CONSOLE.propoe(new Lance(ALEX, 200.0));
+        CONSOLE.propoe(new Lance(ALEX, 100.0));
+        final List<Lance> tresMaioredsLancesParaQuatroLances = CONSOLE.tresMaioresLances();
+        assertEquals(3, tresMaioredsLancesParaQuatroLances.size());
+        assertEquals(400.0, tresMaioredsLancesParaQuatroLances.get(0).getValor(), DELTA);
+        assertEquals(300.0, tresMaioredsLancesParaQuatroLances.get(1).getValor(), DELTA);
+        assertEquals(200.0, tresMaioredsLancesParaQuatroLances.get(2).getValor(), DELTA);
+        CONSOLE.propoe(new Lance(ALEX, 700.0));
+        final List<Lance> tresMaioredsLancesParaCincoLances = CONSOLE.tresMaioresLances();
+        assertEquals(3, tresMaioredsLancesParaCincoLances.size());
+        assertEquals(700.0, tresMaioredsLancesParaCincoLances.get(0).getValor(), DELTA);
+        assertEquals(400.0, tresMaioredsLancesParaCincoLances.get(1).getValor(), DELTA);
+        assertEquals(300.0, tresMaioredsLancesParaCincoLances.get(2).getValor(), DELTA);
+    }
+
 }
